@@ -1,0 +1,54 @@
+body {
+  font-family: "League Spartan", sans-serif;
+  color: #391713;
+  /* The <body> element has a default margin of 8px
+     on all sides. This removes the default margins. */
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+.quantity-selector {
+    color: rgb(33, 33, 33);
+    background-color: rgb(240, 240, 240);
+    border: 1px solid rgb(213, 217, 217);
+    border-radius: 8px;
+    padding: 3px auto;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
+}
+
+input, select, button {
+  font-family: "League Spartan", sans-serif;
+}
+
+.button-primary {
+  color: #FF642F;
+  background-color: #FFD8C7;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
+}
+
+.button-primary:hover {
+  color: white;
+  background-color: #FF642F;
+  border: none;
+}
+
+.link-primary {
+  color: rgb(1, 124, 182);
+  cursor: pointer;
+}
+
+.link-primary:hover {
+  color: rgb(196, 80, 0);
+}

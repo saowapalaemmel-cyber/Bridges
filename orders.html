@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Orders</title>
+
+    <!-- This code is needed for responsive design to work.
+      (Responsive design = make the website look good on
+      smaller screen sizes like a phone or a tablet). -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Load a font called Roboto from Google Fonts. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=League+Spartan:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- Here are the CSS files for this page. -->
+    <link rel="stylesheet" href="./styles/shared/header.css">
+    <link rel="stylesheet" href="./styles/shared/general.css">
+    <link rel="stylesheet" href="./styles/pages/orders.css">
+  </head>
+  <body>
+    <header>
+      <div class="header-left-section">
+        <a href="Home.html">
+          <h1 class="logo">hung.</h1>
+        </a>
+      </div>
+
+      <div class="header-middle-section">
+        <input class="search-bar js-search-bar" type="text" placeholder="Search">
+
+        <button class="search-button js-search-button">
+          <img class="search-icon" src="images/icons/search-icon.png">
+        </button>
+      </div>
+
+      <div class="header-right-section">
+        <a class="cart-link" href="checkout.html">
+          <img class="cart-icon" src="images/icons/cart-icon.png">
+          <div class="cart-quantity js-cart-quantity"></div>
+          <div class="cart-text">Cart</div>
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+      <div class="page-title">Your Orders</div>
+
+      <div class="orders-grid js-orders-grid">
+      </div>
+    </div>
+    <script type="module" src="./scripts/orders.js"></script>
+  </body>
+</html>
