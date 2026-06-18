@@ -63,3 +63,47 @@
   text-align: right;
   font-weight: bold;
 }
+
+@media (max-width: 599px) {
+  .main {
+    max-width: none;
+    margin: 70px auto 24px;
+    padding: 0 10px;
+  }
+
+  .tracking-box {
+    border-radius: 8px;
+    padding: 14px;
+  }
+
+  .tracking-header h2 {
+    font-size: 20px;
+  }
+
+  .tracking-status {
+    gap: 6px;
+    margin: 16px 0;
+  }
+
+  .step {
+    font-size: 12px;
+    padding: 8px 4px;
+    white-space: normal;
+  }
+
+  .tracking-item {
+    grid-template-columns: 52px 1fr;
+    gap: 8px 10px;
+  }
+
+  .tracking-image {
+    width: 48px;
+    height: 48px;
+  }
+
+  .tracking-price {
+    grid-column: 2;
+    text-align: left;
+    font-size: 14px;
+  }
+}

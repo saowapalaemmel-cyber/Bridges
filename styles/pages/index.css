@@ -306,16 +306,17 @@
   object-fit: contain;
 }
 
-/* Mobile */
-@media (max-width: 768px) {
+@media (max-width: 599px) {
   .hero {
     flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+
+    border-radius: 18px;
+    padding: 24px 18px;
+    margin: 16px 10px;
+
     text-align: center;
-
-    padding: 30px 20px;
-    margin: 30px 20px 40px;
-
-    gap: 30px;
   }
 
   .hero-content {
@@ -323,38 +324,143 @@
   }
 
   .hero h1 {
-    font-size: 40px;
+    font-size: 36px;
+    line-height: 1.15;
+    margin: 12px 0;
+  }
+
+  .hero p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .order-btn {
+    margin-top: 18px;
+    padding: 12px 22px;
+    font-size: 14px;
+  }
+
+  .hero-image {
+    width: 100%;
   }
 
   .hero-image img {
-    width: 100%;
-    max-width: 350px;
-    margin-top: 20px;
+    max-width: 100%;
   }
 
-  .menu-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .menu-grid {
+  .category-container {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
-    justify-content: center;
+
+    margin: 24px 0 16px;
+    padding: 0 10px;
+  }
+
+  .category-btn {
+    flex: 0 0 auto;
+    padding: 8px 14px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .main {
+    margin-top: 16px;
+    padding: 0 10px;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .menu-container {
-    margin: 0 auto;
-  }
-
-  .menu-name {
-    font-size: 16px;
+    border-radius: 16px;
+    padding: 14px;
   }
 
   .menu-image {
-    height: 120px;
-    object-fit: cover;
+    height: 210px;
+    border-radius: 12px;
+  }
+
+  .menu-header {
+    gap: 10px;
+  }
+
+  .menu-name {
+    font-size: 18px;
+  }
+
+  .menu-price {
+    font-size: 18px;
+    white-space: nowrap;
+  }
+
+  .menu-description {
+    font-size: 13px;
+    min-height: auto;
+  }
+
+  .menu-quantity-container {
+    margin: 14px 0;
+  }
+
+  .quantity-control {
+    gap: 18px;
+  }
+
+  .quantity-value {
+    font-size: 20px;
+  }
+
+  .add-to-cart-button {
+    font-size: 14px;
+    padding: 11px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+  .hero {
+    gap: 32px;
+    padding: 36px;
+    margin: 24px 20px;
+    border-radius: 24px;
+  }
+
+  .hero h1 {
+    font-size: 44px;
+  }
+
+  .hero-image img {
+    max-width: 360px;
+  }
+
+  .category-container {
+    margin-top: 32px;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .menu-image {
+    height: 220px;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1199px) {
+  .hero {
+    padding: 44px;
+    margin: 28px 32px;
+  }
+
+  .hero h1 {
+    font-size: 52px;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

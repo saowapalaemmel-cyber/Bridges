@@ -289,68 +289,149 @@
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 599px) {
   .main {
-    max-width: 100%;
-    padding-left: 16px;
-    padding-right: 16px;
-    margin: 60px auto;
+    max-width: none;
+    margin: 72px auto 48px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .page-title {
+    font-size: 14px;
+    margin-bottom: 14px;
   }
 
   .checkout-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    max-width: none;
     margin: 20px auto;
+    grid-template-columns: 1fr;
+    row-gap: 16px;
   }
 
-  /* stack layout */
   .right-column {
-    order: 2;
-    gap: 12px;
+    gap: 10px;
   }
 
-  .cart-item-container {
-    order: 1;
-  }
-
-  .delivery-options {
-    order: 2;
-  }
-
+  .cart-item-container,
+  .delivery-options,
   .payment-summary {
-    order: 3;
+    border-radius: 14px;
+    padding: 14px;
   }
 
-  /* cart item mobile */
+  .payment-summary-title {
+    font-size: 16px;
+  }
+
+  .payment-summary-row {
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .total-row {
+    font-size: 16px;
+    padding-top: 14px;
+  }
+
+  .place-order-button {
+    height: 46px;
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .delivery-time {
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+
+  .delivery-options-title{
+    font-size: 12px;
+  }
+  .delivery-option {
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .delivery-option-price {
+    font-size: 13px;
+  }
+
   .cart-item-details-grid {
-    display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 20px;
+    grid-template-columns: 120px 1fr;
+    gap: 12px;
     align-items: center;
   }
 
   .menu-image {
-    display: block;
-    margin: 0 auto;
-    border-radius: 12px;
-}
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    justify-self: center;
+  }
 
   .menu-name {
-    font-size: 17px;
+    font-size: 15px;
+    line-height: 1.35;
+    margin-bottom: 6px;
   }
 
   .menu-price {
-    font-size: 18px;
-  }
-
-  /* button touch-friendly */
-  .place-order-button {
-    height: 48px;
     font-size: 16px;
+    margin-bottom: 10px;
   }
 
-  /* delivery option compact */
-  .delivery-option {
-    padding: 12px;
+  .item-actions-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    align-items: start;
+  }
+
+  .update-quantity-container {
+    width: fit-content;
+  }
+
+  .quantity-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 17px;
+  }
+
+  .quantity-value {
+    font-size: 15px;
+  }
+
+  .update-quantity-link,
+  .delete-quantity-link,
+  .save-quantity-link {
+    display: none;
+  }
+
+  .quantity-input {
+    width: 48px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+  .main {
+    max-width: 760px;
+    margin: 80px auto 64px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .checkout-grid {
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+  }
+
+  .cart-item-details-grid {
+    grid-template-columns: 120px 1fr;
+  }
+
+  .menu-image {
+    width: 120px;
+    height: 120px;
   }
 }
