@@ -4,7 +4,7 @@ import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import { getMenu } from "../../data/menus.js";
 import { addOrder } from '../../data/orders.js';
 import { formatCurrency } from "../utils/money.js";
-
+import { createOrderFromCart } from "../../data/orders.js"
 
 
 export function renderPaymentSummary() {
@@ -68,28 +68,23 @@ export function renderPaymentSummary() {
   document.querySelector('.js-place-order')
   .addEventListener('click', () => {
 
-    const order = {
-      id: crypto.randomUUID(),
-      orderTime: new Date().toISOString(),
-
-      cost: {
-        items: menuPrice,
-        shipping: shippingPrice,
-        tax: tax,
-        total: totalPrice
-      },
-
-      products: cart.cartItems.map((item) => ({
-        menuId: item.menuId,
-        quantity: item.quantity,
-        estimatedDeliveryTime: dayjs().add(1, 'day').toISOString()
-      }))
-    };
+    try {
+      const order = createOrderFromCart(
+        cart,
+        menuPrice,
+        shippingPrice,
+        tax,
+        totalPrice
+      );
 
     addOrder(order);
 
     cart.resetCart();
 
     window.location.href = 'orders.html';
+
+    }catch (error) {
+      alert(error.message);
+    }
   });
 }

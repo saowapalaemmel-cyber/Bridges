@@ -1,29 +1,33 @@
 .checkout-header {
   height: 60px;
-  padding-left: 30px;
-  padding-right: 30px;
-  background-color: #F5CB58;
+  padding: 0 30px;
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border);
 
   display: flex;
   justify-content: center;
+  justify-content: space-between;
 
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+
   z-index: 1000;
 }
 
 .header-content {
   width: 100%;
   max-width: 1100px;
+  margin: 0 auto;
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .checkout-header-left-section {
-  width: 150px;
+  width: 180px;
 }
 
 .checkout-header-left-section a {
@@ -31,66 +35,58 @@
 }
 
 .logo {
-  font-family: "Poppins";
-  font-weight: 800;
+  font-family: "Libre Baskerville", serif;
+  font-weight: 600;
   font-size: 28px;
-  color: #FF642F;
+  color: #6F8B65;
   text-decoration: none;
   width: 100px;
 }
 
-@media (max-width: 575px) {
-  .checkout-header-left-section {
-    width: auto;
-  }
-
-  .amazon-logo {
-    display: none;
-  }
-}
 .checkout-header-middle-section {
   flex: 1;
-  flex-shrink: 0;
   text-align: center;
 
-  font-size: 25px;
-  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
 
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .return-to-home-link {
-  color: rgb(0, 113, 133);
-  font-size: 23px;
+  color: #6F8B65;
+  font-size: 20px;
   text-decoration: none;
   cursor: pointer;
 }
 
-@media (max-width: 1000px) {
+.checkout-header-right-section {
+  width: 180px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .checkout-header {
+    padding: 0 15px;
+  }
+
+  .checkout-header-left-section,
+  .checkout-header-right-section {
+    width: auto;
+  }
+
+  .logo {
+    font-size: 28px;
+  }
+
   .checkout-header-middle-section {
-    font-size: 20px;
-    margin-right: 60px;
+    font-size: 22px;
   }
 
   .return-to-home-link {
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 575px) {
-  .checkout-header-middle-section {
-    margin-right: 5px;
-  }
-}
-
-.checkout-header-right-section {
-  text-align: right;
-  width: 150px;
-}
-
-@media (max-width: 1000px) {
-  .checkout-header-right-section {
-    width: auto;
+    font-size: 20px;
   }
 }

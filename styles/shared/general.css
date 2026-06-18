@@ -1,9 +1,34 @@
+:root {
+  --primary: #6F8B65;
+  --primary-dark: #5E7855;  
+  --primary-light: #EEF3EA;
+
+  --warm-accent: #C96A2B;
+  --accent: #E3A857;
+  --accent-dark: #D0933D;
+
+  --text: #3F3A34;
+  --muted: #8C847B;
+
+  --border: #EAE5DE;
+  --background: #FAF7F1;
+  --white: #FFFFFF;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
 body {
-  font-family: "League Spartan", sans-serif;
-  color: #391713;
+  font-family: "Open Sans", sans-serif;
+  background: var(--background);
+  color: var(--text);
   /* The <body> element has a default margin of 8px
      on all sides. This removes the default margins. */
   margin: 0;
+  padding: 60px;
 }
 
 p {
@@ -14,24 +39,17 @@ button {
   cursor: pointer;
 }
 
-.quantity-selector {
-    color: rgb(33, 33, 33);
-    background-color: rgb(240, 240, 240);
-    border: 1px solid rgb(213, 217, 217);
-    border-radius: 8px;
-    padding: 3px auto;
-    font-size: 15px;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
+select {
+  cursor: pointer;
 }
 
 input, select, button {
-  font-family: "League Spartan", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .button-primary {
-  color: #FF642F;
-  background-color: #FFD8C7;
+  color: #FFFF;
+  background-color: var(--accent);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -40,15 +58,15 @@ input, select, button {
 
 .button-primary:hover {
   color: white;
-  background-color: #FF642F;
+  background-color: var(--accent-dark);
   border: none;
 }
 
 .link-primary {
-  color: rgb(1, 124, 182);
+  color: var(--primary);
   cursor: pointer;
 }
 
 .link-primary:hover {
-  color: rgb(196, 80, 0);
+  color: var(--accent);
 }

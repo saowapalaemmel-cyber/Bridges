@@ -30,7 +30,7 @@ export function renderDeliveryOption() {
 
       const priceString = deliveryOption.price === 0
         ? 'FREE'
-        : `${formatCurrency(deliveryOption.price)} - `;
+        : `฿${formatCurrency(deliveryOption.price)} - `;
 
       const isChecked = deliveryOption.id === selectedDeliveryOptionId;
 
@@ -42,6 +42,9 @@ export function renderDeliveryOption() {
             class="delivery-option-input"
             name="delivery-option">
           <div>
+            <div class="delivery-option-name">
+              ${deliveryOption.name}
+            </div>
             <div class="delivery-option-time">
               ${timeString} (${deliveryOption.deliveryTime} minutes)
             </div>

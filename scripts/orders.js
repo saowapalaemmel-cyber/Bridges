@@ -8,24 +8,30 @@ function loadPage() {
   let ordersHTML = '';
 
   orders.forEach((order) => {
-    const orderTimeString = dayjs(order.orderTime).format('DD MMM, HH:mm');
+    const orderTimeString = dayjs(order.orderTime).format('DD MMM YYYY, HH:mm');
 
     ordersHTML += `
       <div class="order-container">
         <div class="order-header">
           <div class="order-header-left-section">
-            <div class="order-date">
-              <div class="order-header-label">Order Placed:</div>
-              <div>${orderTimeString}</div>
+            <div class="parcel-icon">
+              <img class="parcel-image" src="images/icons/parcel.png">
             </div>
-            <div class="order-total">
-              <div class="order-header-label">Total:</div>
-              <div>$${formatCurrency(order.cost.total)}</div>
+            <div class="order-info">
+              <div class="order-id">Order #${order.id} </div>
+              <div class="order-date">Placed on ${orderTimeString}</div>
+            </div>
+            <div class="order-total-info">
+              <div class="order-total-label">Total</div>
+              <div class="order-total">฿${formatCurrency(order.cost.total)}</div>
             </div>
           </div>
           <div class="order-header-right-section">
-            <div class="order-header-label">Order ID:</div>
-            <div>${order.id}</div>
+            <a href="tracking.html?orderId=${order.id}">
+              <button class="track-package-button button-secondary">
+                Track Order
+              </button>
+            </a>
           </div>
         </div>
         <div class="order-details-grid">
@@ -49,26 +55,16 @@ function loadPage() {
           <div class="menu-name">
             ${menu.name}
           </div>
-          <div class="menu-delivery-date">
-            Arriving on: ${
-              dayjs(menuDetails.estimatedDeliveryTime).format('HH:mm')
-            }
-          </div>
           <div class="menu-quantity">
             Quantity: ${menuDetails.quantity}
           </div>
+        </div>
+        <div class="buy-again-container">
           <button class="buy-again-button button-primary js-buy-again"
             data-menu-id="${menu.id}">
             <img class="buy-again-icon" src="images/icons/buy-again.png">
             <span class="buy-again-message">Buy it again</span>
           </button>
-        </div>
-        <div class="product-actions">
-          <a href="tracking.html?orderId=${order.id}&productId=${menu.id}">
-            <button class="track-package-button button-secondary">
-              Track package
-            </button>
-          </a>
         </div>
       `;
     });
@@ -92,7 +88,7 @@ function loadPage() {
         `;
       }, 1000);
 
-      const cartQuantity = calculateCartQuantity();
+      const cartQuantity = cart.calculateCartQuantity();
       document.querySelector('.js-cart-quantity')
         .innerHTML = cartQuantity;
     });
@@ -101,6 +97,7 @@ function loadPage() {
   const cartQuantity = cart.calculateCartQuantity();
   document.querySelector('.js-cart-quantity')
     .innerHTML = cartQuantity;
+
 }
 
 loadPage();

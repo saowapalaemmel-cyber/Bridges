@@ -6,14 +6,14 @@ export function renderCheckoutHeader() {
   const checkoutHeaderHTML = `
     <div class="header-content">
       <div class="checkout-header-left-section">
-        <a href="home.html">
-          <h1 class="logo">hung.</h1>
+        <a href="index.html">
+          <h1 class="logo">Bridges</h1>
         </a>
       </div>
 
       <div class="checkout-header-middle-section">
         Checkout (<a class="return-to-home-link js-return-to-home-link"
-          href="home.html">${cartQuantity}</a>)
+          href="index.html">${cartQuantity}</a>)
       </div>
 
       <div class="checkout-header-right-section">

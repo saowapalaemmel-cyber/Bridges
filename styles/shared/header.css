@@ -1,8 +1,9 @@
 header {
-  background-color: #F5CB58;
-  color: #391713;
-  padding-left: 15px;
-  padding-right: 15px;
+  height: 60px;
+  padding: 0 30px;
+  background-color: var(--background);
+
+  border-bottom: 1px solid var(--border);
 
   display: flex;
   align-items: center;
@@ -12,13 +13,12 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  height: 60px;
 
   z-index: 1000;
 }
 
 .header-left-section {
-  width: 180px;
+  width: auto;
 }
 
 .header-left-section a {
@@ -26,18 +26,38 @@ header {
 }
 
 .logo {
-  font-family: "Poppins";
-  font-weight: 800;
+  font-family: "Libre Baskerville", serif;
+  font-weight: 700;
   font-size: 28px;
-  color: #FF642F;
+  color: var(--primary);
   text-decoration: none;
   width: 100px;
 }
 
+.navbar {
+  display: flex;
+  gap: 28px;
+  flex-shrink: 0;
+  margin-left: 500px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: var(--text);
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.navbar a:hover {
+  opacity: 0.7;
+}
+
 .header-middle-section {
   position: relative;
-  flex: 1;
-  max-width: 850px;
+  flex: 0 1 450px;
+  max-width: 450px;
   margin-left: 10px;
   margin-right: 10px;
   display: flex;
@@ -48,12 +68,8 @@ header {
   width: 0;
   font-size: 16px;
   height: 38px;
-  padding-left: 15px;
+  padding: 0 15px;
   border: none;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
   border-radius: 60px;
 }
 
@@ -75,7 +91,6 @@ header {
 }
 
 .header-right-section {
-  width: 180px;
   flex-shrink: 0;
   display: flex;
   justify-content: end;
@@ -86,7 +101,7 @@ header {
 }
 
 .cart-link {
-  color: white;
+  color: var(--primary);
   display: flex;
   align-items: center;
   position: relative;
@@ -94,25 +109,82 @@ header {
 
 .cart-icon {
   width: 50px;
+  filter: brightness(0) saturate(100%) invert(80%);
 }
 
 .cart-text {
-  font-family: "League Spartan", sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin-top: 12px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
 }
 
 .cart-quantity {
-  color: #FF642F;
-  font-family: "League Spartan", sans-serif;
+  color: var(--primary);
+  font-family: "Open Sans", sans-serif;
   font-size: 18px;
   font-weight: 700;
 
   position: absolute;
-  top: 2px;
+  top: -4px;
   left: 16px;
   
   width: 26px;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  header {
+    height: 60px;
+    padding: 0 15px;
+  }
+
+  .header-left-section {
+    width: auto;
+  }
+
+  .logo {
+    font-size: 28px;
+  }
+
+  .navbar {
+    display: none;
+  }
+
+  .header-middle-section {
+    flex: 0 1 360px;
+    margin: 0 10px;
+  }
+
+  .search-bar {
+    font-size: 14px;
+    height: 36px;
+  }
+
+  .search-button {
+    width: 40px;
+    height: 36px;
+  }
+
+  .search-icon {
+    height: 18px;
+  }
+
+  .header-right-section {
+    width: auto;
+  }
+
+  .cart-icon {
+    width: 42px;
+  }
+
+  .cart-text {
+    display: none; /* ซ่อนคำว่า Cart */
+  }
+
+  .cart-quantity {
+    font-size: 16px;
+    left: 12px;
+    top: -4px;
+  }
 }

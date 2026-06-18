@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Load a font from Google Fonts. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <!-- Here are the CSS files for this page. -->
+    <link rel="stylesheet" href="./styles/shared/header.css">
+    <link rel="stylesheet" href="./styles/shared/general.css">
+    <link rel="stylesheet" href="./styles/pages/index.css">
+
+  </head>
+  <body>
+    <header class="header">
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <span class="tag">
+          Bridges — dishes from many countries
+        </span>
+
+        <h1>
+          Flavors<br>
+          of countries
+        </h1>
+
+        <p>
+          Inspired by cuisines from many cultures, featuring dishes shaped by different culinary traditions and ways of cooking.
+        </p>
+      </div>
+
+      <div class="hero-image">
+        <img src="./images/banner/menu.jpg" alt="Bridge">
+      </div>
+
+    </section>
+
+
+    <div id="category" class="category-container">
+      <button class="category-btn js-category-btn active" data-category="All">
+        All
+      </button>
+
+      <button class="category-btn js-category-btn" data-category="Breakfast">
+        Breakfast
+      </button>
+
+      <button class="category-btn js-category-btn" data-category="Main">
+        Main Course
+      </button>
+
+      <button class="category-btn js-category-btn" data-category="Dessert">
+        Dessert
+      </button>
+    </div>
+
+    <div class="main">
+      <div class="menu-grid js-menu-grid">
+      </div>
+    </div>
+
+    <script type="module" src="./scripts/header.js"></script>
+    <script type="module" src="./scripts/index.js"></script>
+  </body>
+
+</html>
