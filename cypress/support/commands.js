@@ -1,25 +1,20 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('addProduct', (id) => {
+    cy.get(`.js-add-to-cart[data-menu-id="${id}"]`)
+      .click()
+})
+
+Cypress.Commands.add('searchMenu', (keyword) => {
+  cy.get('.search-bar')
+    .clear()
+    .type(`${keyword}{enter}`)
+})
+
+Cypress.Commands.add('selectCategory', (category) => {
+  cy.contains('.category-btn', category).click()
+})
+
+Cypress.Commands.add('verifyAddedButton', (id) => {
+    cy.get(`.js-add-to-cart[data-menu-id="${id}"]`)
+      .should('have.class','added')
+      .and('contain','Added')
+})

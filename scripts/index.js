@@ -71,7 +71,7 @@ function renderMenuGrid() {
 
   filteredMenus.forEach((menu) => {
     menuHTML += `
-      <div class="menu-container">
+      <div class="menu-container" data-category="${menu.category}">
         <div class="menu-image-container">
           <img
             class="menu-image"
