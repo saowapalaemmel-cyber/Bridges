@@ -1,11 +1,7 @@
-import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { cart } from "../../data/cart-class.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import { getMenu } from "../../data/menus.js";
-import { addOrder } from '../../data/orders.js';
 import { formatCurrency } from "../utils/money.js";
-import { createOrderFromCart } from "../../data/orders.js"
-
 
 export function renderPaymentSummary() {
   let menuPrice = 0;
@@ -66,25 +62,42 @@ export function renderPaymentSummary() {
     .innerHTML = paymentSummaryHTML;
 
   document.querySelector('.js-place-order')
-  .addEventListener('click', () => {
+    .addEventListener('click', async () => {
 
-    try {
-      const order = createOrderFromCart(
-        cart,
-        menuPrice,
-        shippingPrice,
-        tax,
-        totalPrice
-      );
+      const orderData = {
+        items: cart.cartItems.map((item) => ({
+          menuId: item.menuId,
+          quantity: item.quantity
+        })),
 
-    addOrder(order);
+        deliveryOptionId: cart.cartItems[0].deliveryOptionId
+      };
 
-    cart.resetCart();
+      try {
+        const response = await fetch('http://localhost:3000/api/orders', {
+          method: 'POST', 
 
-    window.location.href = 'orders.html';
+          headers: {
+            'Content-Type': 'application/json'
+          },
 
-    }catch (error) {
-      alert(error.message);
-    }
+          body: JSON.stringify(orderData)
+        });
+
+        const order = await response.json();
+
+        if (!response.ok) {
+          throw new Error(order.message);
+        }
+
+        console.log('Order created:', order);
+
+        cart.resetCart();
+
+        window.location.href = 'orders.html';
+
+      } catch (error) {
+        alert(error.message);
+      }
   });
 }

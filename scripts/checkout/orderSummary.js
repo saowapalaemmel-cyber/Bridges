@@ -132,16 +132,21 @@ export function renderOrderSummary() {
         alert('Quantity must be at least 0 and less than 1000');
         return;
       }
-      cart.updateQuantity(menuId,newQuantity);
+      if (newQuantity === 0){
+        cart.removeFromCart(menuId);
+      }else {
+        cart.updateQuantity(menuId,newQuantity);
+      }
+
 
       const container = document.querySelector(
         `.js-cart-item-container-${menuId}`
       );
       container.classList.remove('is-editing-quantity');
 
-      const quantityLabel = document.querySelector(
-        `.js-quantity-label-${menuId}`
-      );
+      // const quantityLabel = document.querySelector(
+      //   `.js-quantity-label-${menuId}`
+      // );
 
       renderCheckoutHeader();
       renderOrderSummary();

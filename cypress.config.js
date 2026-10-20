@@ -4,6 +4,10 @@ module.exports = defineConfig({
   allowCypressEnv: false,
 
   e2e: {
-    baseUrl: 'https://saowapalaemmel-cyber.github.io/Bridges/',
+    baseUrl: 'http://127.0.0.1:5500',
+  },
+
+  env: {
+    apiUrl: 'http://localhost:3000',
   },
 });

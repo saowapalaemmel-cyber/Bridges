@@ -1,5 +1,3 @@
-import { menus } from "../../data/menus"
-
 describe('Bridges Home Page', () => {
 
   beforeEach(() => {
@@ -80,43 +78,73 @@ describe('Bridges Home Page', () => {
 
   describe('Category Filter', () => {
     it('TC_IDX_008 Verify All category filter',() => {
-      cy.selectCategory('All')
-      cy.get('.menu-container').should('have.length', menus.length)
+      cy.request('GET', 'http://localhost:3000/api/menu')
+        .then((response) => {
+          expect(response.status).to.eq(200)
+
+        const menusFromAPI = response.body
+
+        cy.selectCategory('All')
+
+        cy.get('.menu-container')
+        .should('have.length', menusFromAPI.length)
+      })
     })
 
 
     it('TC_IDX_009 Verify Breakfast filter',() => {
-      const breakfast = menus.filter(menu => menu.category === 'Breakfast')
-      cy.selectCategory('Breakfast')
-      cy.get('.menu-container[data-category="Breakfast"]')
+      cy.request('GET', 'http://localhost:3000/api/menu')
+      .then((response) => {
+        expect(response.status).to.eq(200)
+
+        const breakfast = response.body.filter(
+          menu => menu.category === 'Breakfast'
+        )
+
+        cy.selectCategory('Breakfast')
+
+        cy.get('.menu-container[data-category="Breakfast"]')
         .should('have.length', breakfast.length)
 
-      breakfast.forEach(({ name }) => {
-        cy.contains(name).should('be.visible')
+        breakfast.forEach(({ name }) => {
+          cy.contains('.menu-container', name).should('be.visible')
+        })
       })
     })
 
     it('TC_IDX_010 Verify Main Course filter',() => {
-      const mainCourse = menus.filter(menu => menu.category === 'Main')
+      cy.request('GET', 'http://localhost:3000/api/menu')
+      .then((response) => {
+        expect(response.status).to.eq(200)
 
-      cy.selectCategory('Main Course')
-      cy.get('.menu-container[data-category="Main"]')
-        .should('have.length', mainCourse.length)
+        const mainCourse = response.body.filter(
+          menu => menu.category === 'Main')
 
-      mainCourse.forEach(({ name }) => {
-        cy.contains(name).should('be.visible')
+        cy.selectCategory('Main Course')
+        cy.get('.menu-container[data-category="Main"]')
+          .should('have.length', mainCourse.length)
+
+        mainCourse.forEach(({ name }) => {
+          cy.contains('.menu-container', name).should('be.visible')
+        })
       })
     })
 
     it('TC_IDX_011 Verify Dessert filter',() => {
-      const desserts = menus.filter(menu => menu.category === 'Dessert')
+      cy.request('GET', 'http://localhost:3000/api/menu')
+      .then((response) => {
+        expect(response.status).to.eq(200)
 
-      cy.selectCategory('Dessert')
-      cy.get('.menu-container[data-category="Dessert"]')
+        const desserts = response.body.filter(
+          menu => menu.category === 'Dessert')
+
+        cy.selectCategory('Dessert')
+        cy.get('.menu-container[data-category="Dessert"]')
         .should('have.length', desserts.length)
 
-      desserts.forEach(({ name }) => {
-        cy.contains(name).should('be.visible')
+        desserts.forEach(({ name }) => {
+          cy.contains('.menu-container', name).should('be.visible')
+        })
       })
     })
 
@@ -124,9 +152,24 @@ describe('Bridges Home Page', () => {
 
   describe('Search', () => {
     it('TC_IDX_012 Search existing menu item',() => {
-      cy.searchMenu('Pasta')
-      cy.get('.menu-container').should('have.length', 1)
-      cy.get('.menu-name').should('contain','Pasta')
+      cy.request('GET', 'http://localhost:3000/api/menu')
+        .then((response) => {
+        expect(response.status).to.eq(200)
+
+        const menu = response.body.find(
+          item => item.name.toLowerCase().includes('pasta')
+        )
+
+        expect(menu, 'Pasta menu exists in API').to.exist
+
+        cy.searchMenu(menu.name)
+
+        cy.get('.menu-container')
+          .should('have.length', 1)
+
+        cy.get('.menu-name')
+          .should('contain',menu.name)
+      })
     })
 
     it('TC_IDX_013 Search non-existing menu item',() => {
@@ -135,113 +178,180 @@ describe('Bridges Home Page', () => {
     })
 
     it('TC_IDX_014 Search with lowercase characters',() => {
-      cy.searchMenu('pasta')
-      cy.get('.menu-container').should('have.length', 1)
-      cy.get('.menu-name').should('contain','Pasta')
+      cy.request('GET', 'http://localhost:3000/api/menu')
+        .then((response) => {
+          expect(response.status).to.eq(200)
+
+          const menu =response.body.find(
+            item => item.name.toLowerCase().includes('pasta')
+          )
+
+          expect(menu, 'Pasta menu exists in API').to.exist
+
+          cy.searchMenu(menu.name.toLowerCase())
+
+          cy.get('.menu-container')
+            .should('have.length', 1)
+
+          cy.get('.menu-name')
+            .should('contain', menu.name)
+        })
     })
 
     it('TC_IDX_015 Search with special characters',() => {
       cy.searchMenu('@pasta')
-      cy.get('.menu-container').should('have.length', 0)
+
+      cy.get('.menu-container')
+        .should('have.length', 0)
     })
   })
 
   describe('Product Card', () => {
     it('TC_IDX_016 Verify product card information',() => {
-      cy.get('.menu-container').should('have.length', menus.length)
+      cy.request('GET', 'http://localhost:3000/api/menu')
+        .then((response) => {
+          expect(response.status).to.eq(200)
+
+          const menusFromAPI = response.body
+
+          cy.get('.menu-container')
+            .should('have.length', menusFromAPI.length)
       
-      menus.forEach(menu => {
-        cy.contains('.menu-name', menu.name)
-        .parents('.menu-container')
-        .within(() => {
+          menusFromAPI.forEach(menu => {
+            cy.contains('.menu-name', menu.name)
+              .parents('.menu-container')
+              .within(() => {
 
-          cy.get('.menu-name')
-            .should('have.text', menu.name)
+                cy.get('.menu-name')
+                  .should('have.text', menu.name)
 
-          cy.get('.menu-price')
-            .should('contain', `฿${menu.price}`)
+                cy.get('.menu-price')
+                  .should('contain', `฿${menu.price}`)
 
-          cy.get('.menu-description')
-            .should('contain', menu.description)
+                cy.get('.menu-description')
+                  .should('contain', menu.description)
 
-          cy.get('.menu-image')
-            .should('have.attr', 'src')
-            .and('include', menu.image)
+                cy.get('.menu-image')
+                  .should('have.attr', 'src')
+                  .and('include', menu.image)
 
-          cy.get('.flag')
-            .should('have.attr', 'src')
-            .and('include', menu.country)
+                cy.get('.flag')
+                  .should('have.attr', 'src')
+                  .and('include', menu.country)
 
-          cy.get('.menu-rating-count')
-            .should('contain', `${menu.rating.count} reviews`)
+                cy.get('.menu-rating-count')
+                  .should('contain', `${menu.rating.count} reviews`)
 
+              })
+          })
         })
-      })
     })
   })
 
   describe('Quantity', () => {
     it('TC_IDX_017 Verify quantity increase',() => {
-      cy.get('.js-quantity-1').should('contain', '1')
-      cy.get('.js-increase-btn[data-menu-id="1"]').click()
-      cy.get('.js-quantity-1').should('contain', '2')
+      cy.get('.js-quantity-1')
+        .should('contain', '1')
+
+      cy.get('.js-increase-btn[data-menu-id="1"]')
+        .click()
+
+      cy.get('.js-quantity-1')
+        .should('contain', '2')
     })
 
     it('TC_IDX_018 Verify quantity decrease',() => {
-      cy.get('.js-increase-btn[data-menu-id="1"]').click()
-      cy.get('.js-quantity-1').should('contain', '2')
-      cy.get('.js-decrease-btn[data-menu-id="1"]').click()
-      cy.get('.js-quantity-1').should('contain', '1')
+      cy.get('.js-increase-btn[data-menu-id="1"]')
+        .click()
+
+      cy.get('.js-quantity-1')
+        .should('contain', '2')
+
+      cy.get('.js-decrease-btn[data-menu-id="1"]')
+        .click()
+
+      cy.get('.js-quantity-1')
+        .should('contain', '1')
     })
 
     it('TC_IDX_019 Verify minimum quantity',() => {
-      cy.get('.js-quantity-1').should('contain', '1')
-      cy.get('.js-decrease-btn[data-menu-id="1"]').click()
-      cy.get('.js-quantity-1').should('contain', '1')
+      cy.get('.js-quantity-1')
+        .should('contain', '1')
+
+      cy.get('.js-decrease-btn[data-menu-id="1"]')
+        .click()
+
+      cy.get('.js-quantity-1')
+        .should('contain', '1')
     })
   })
 
 
   describe('Cart', () => {
     it('TC_IDX_020 Verify add to cart',() => {
-      cy.get('.js-cart-quantity').should('contain','0')
+      cy.get('.js-cart-quantity')
+        .should('contain','0')
+
       cy.addProduct(1)
+
       cy.verifyAddedButton(1)
-      cy.get('.js-cart-quantity').should('contain','1')
+
+      cy.get('.js-cart-quantity')
+        .should('contain','1')
     })
 
     it('TC_IDX_021 Verify multiple quantities added',() => {
-      cy.get(`.js-increase-btn[data-menu-id="1"]`).click().click()
-      cy.get('.js-quantity-1').should('contain', '3')
+      cy.get(`.js-increase-btn[data-menu-id="1"]`)
+        .click()
+        .click()
+
+      cy.get('.js-quantity-1')
+        .should('contain', '3')
+
       cy.addProduct(1)
+
       cy.verifyAddedButton(1)
-      cy.get('.js-cart-quantity').should('contain','3')
+
+      cy.get('.js-cart-quantity')
+        .should('contain','3')
     })
 
     it('TC_IDX_022 Verify multiple products added',() => {
       cy.addProduct(1)
       cy.verifyAddedButton(1)
+
       cy.addProduct(2)
       cy.verifyAddedButton(2)
+
       cy.addProduct(3)
       cy.verifyAddedButton(3)
-      cy.get('.js-cart-quantity').should('contain','3')
+
+      cy.get('.js-cart-quantity')
+        .should('contain','3')
     })
   })
 
   describe('Cart Badge', () => {
     it('TC_IDX_023 Verify cart count updates',() => {
-      cy.get('.js-cart-quantity').should('contain','0')
+      cy.get('.js-cart-quantity')
+        .should('contain','0')
+
       cy.addProduct(1)
-      cy.get('.js-cart-quantity').should('contain','1')
+
+      cy.get('.js-cart-quantity')
+        .should('contain','1')
     })
     
     it('TC_IDX_024 Verify cart persists after refresh',() => {
       cy.addProduct(10)
-      cy.get('.js-cart-quantity').should('contain','1')
+
+      cy.get('.js-cart-quantity')
+        .should('contain','1')
+
       cy.reload()
-      cy.get('.js-cart-quantity').should('contain','1')
+
+      cy.get('.js-cart-quantity')
+      .should('contain','1')
     })
   })
-
 })

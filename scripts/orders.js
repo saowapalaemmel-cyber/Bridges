@@ -1,14 +1,19 @@
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { cart } from "../data/cart-class.js";
 import { getMenu } from '../data/menus.js';
-import { orders } from '../data/orders.js';
 import formatCurrency from './utils/money.js';
 
-function loadPage() {
+async function loadPage() {
+  const response = await fetch('http://localhost:3000/api/orders');
+  const orders = await response.json();
+
   let ordersHTML = '';
 
   orders.forEach((order) => {
-    const orderTimeString = dayjs(order.orderTime).format('DD MMM YYYY, HH:mm');
+    const orderTimeString = dayjs(order.orderTime)
+      .format('DD MMM YYYY, HH:mm');
+    const estimatedDeliveryTimeString = dayjs(order.estimatedDeliveryTime)
+      .format('DD MMM YYYY, HH:mm');
 
     ordersHTML += `
       <div class="order-container">
@@ -19,7 +24,12 @@ function loadPage() {
             </div>
             <div class="order-info">
               <div class="order-id">Order #${order.id} </div>
-              <div class="order-date">Placed on ${orderTimeString}</div>
+              <div class="order-date">
+                Placed on ${orderTimeString}
+              </div>
+              <div class="order-date">
+                Estimated delivery: ${estimatedDeliveryTimeString}
+              </div>
             </div>
             <div class="order-total-info">
               <div class="order-total-label">Total</div>

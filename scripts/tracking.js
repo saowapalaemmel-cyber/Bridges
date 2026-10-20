@@ -1,5 +1,4 @@
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import { orders } from '../data/orders.js';
 import { getMenu } from '../data/menus.js';
 import formatCurrency from './utils/money.js';
 
@@ -8,27 +7,32 @@ function getOrderIdFromUrl() {
   return url.searchParams.get('orderId');
 }
 
-function findOrder(orderId) {
-  return orders.find(order => order.id === orderId);
-}
-
 function getStatus(step) {
   const statuses = ['Preparing', 'Shipping', 'Delivered'];
   return statuses[step] || 'Preparing';
 }
 
-function renderTracking() {
+async function renderTracking() {
   const orderId = getOrderIdFromUrl();
-  const order = findOrder(orderId);
 
-  if (!order) {
+  const response = await fetch(
+  `http://localhost:3000/api/orders/${orderId}`
+  );
+
+  const order = await response.json();
+
+  if (!response.ok) {
     document.querySelector('.js-tracking-container').innerHTML = `
-      <div>Order not found</div>
+      <div>${order.message}</div>
     `;
     return;
   }
 
-  const orderTime = dayjs(order.orderTime).format('DD MMM YYYY, HH:mm');
+  const orderTime = dayjs(order.orderTime)
+    .format('DD MMM YYYY, HH:mm');
+    
+  const estimatedDeliveryTime = dayjs(order.estimatedDeliveryTime)
+    .format('DD MMM YYYY, HH:mm');
 
   let itemsHTML = '';
 
@@ -51,15 +55,24 @@ function renderTracking() {
     `;
   });
 
-  const statusStep = order.status ?? 1;
+  const statusStep = order.status;
 
   const html = `
     <div class="tracking-box">
 
       <div class="tracking-header">
         <h2>Order #${order.id}</h2>
-        <div class="tracking-date">Placed on ${orderTime}</div>
-        <div class="tracking-total">Total: ฿${formatCurrency(order.cost.total)}</div>
+        <div class="tracking-date">
+          Placed on ${orderTime}
+        </div>
+
+        <div class="tracking-date">
+          Estimated delivery: ${estimatedDeliveryTime}
+        </div>
+
+        <div class="tracking-total">
+          Total: ฿${formatCurrency(order.cost.total)}
+        </div>
       </div>
 
       <div class="tracking-status">

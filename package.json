@@ -23,5 +23,9 @@
   "homepage": "https://github.com/saowapalaemmel-cyber/Bridges#readme",
   "devDependencies": {
     "cypress": "^15.17.0"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "cors": "^2.8.6"
   }
 }

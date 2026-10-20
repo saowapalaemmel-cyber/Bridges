@@ -6,6 +6,15 @@ import { renderPaymentSummary } from "./paymentSummary.js";
 
 export function renderDeliveryOption() {
   const selectedDeliveryOptionId = cart.cartItems[0]?.deliveryOptionId || 'standard';
+
+  cart.cartItems.forEach((cartItem) => {
+    if (!cartItem.deliveryOptionId) {
+      cartItem.deliveryOptionId = 'standard';
+    }
+  });
+
+  cart.saveToStorage();
+
   const deliveryOption = getDeliveryOption (selectedDeliveryOptionId);
   const dateString = calculateDeliveryTime(deliveryOption);
 

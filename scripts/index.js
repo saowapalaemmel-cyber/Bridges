@@ -1,5 +1,5 @@
 import { cart } from "../data/cart-class.js";
-import { menus } from "../data/menus.js";
+// import { menus } from "../data/menus.js";
 
 let selectedCategory = 'All';
 const quantities = {};
@@ -39,7 +39,10 @@ document.querySelectorAll('.js-category-btn')
     });
   });
 
-function renderMenuGrid() {
+async function renderMenuGrid() {
+  const response = await fetch('http://localhost:3000/api/menu');
+  const menus = await response.json();
+
   let menuHTML = '';
 
   const url = new URL(window.location.href);
