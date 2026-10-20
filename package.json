@@ -1,31 +1,30 @@
 {
-  "name": "bridges",
+  "name": "bridges2",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
+  "description": "Bridges Food Ordering Web Application",
+  "main": "backend/server.js",
   "scripts": {
+    "start": "node backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/saowapalaemmel-cyber/Bridges.git"
+    "url": "git+https://github.com/saowapalaemmel-cyber/Bridges2.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/saowapalaemmel-cyber/Bridges/issues"
+    "url": "https://github.com/saowapalaemmel-cyber/Bridges2/issues"
   },
-  "homepage": "https://github.com/saowapalaemmel-cyber/Bridges#readme",
+  "homepage": "https://github.com/saowapalaemmel-cyber/Bridges2#readme",
   "devDependencies": {
     "cypress": "^15.17.0"
   },
   "dependencies": {
     "better-sqlite3": "^13.0.3",
-    "cors": "^2.8.6"
+    "cors": "^2.8.6",
+    "express": "^5.3.0"
   }
 }
