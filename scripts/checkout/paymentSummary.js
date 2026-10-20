@@ -74,15 +74,27 @@ export function renderPaymentSummary() {
       };
 
       try {
-        const response = await fetch('http://localhost:3000/api/orders', {
-          method: 'POST', 
+        // const response = await fetch('http://localhost:3000/api/orders', {
+        //   method: 'POST', 
 
-          headers: {
-            'Content-Type': 'application/json'
-          },
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
 
-          body: JSON.stringify(orderData)
-        });
+        //   body: JSON.stringify(orderData)
+        // });
+        const response = await fetch(
+          'https://bridges2-api.onrender.com/api/orders',
+          {
+            method: 'POST',
+
+            headers: {
+              'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify(orderData)
+          }
+        );
 
         const order = await response.json();
 

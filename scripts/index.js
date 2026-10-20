@@ -40,9 +40,18 @@ document.querySelectorAll('.js-category-btn')
   });
 
 async function renderMenuGrid() {
-  const response = await fetch('http://localhost:3000/api/menu');
-  const menus = await response.json();
+  // const response = await fetch('http://localhost:3000/api/menu');
+  // const menus = await response.json();
+  const response = await fetch(
+    'https://bridges2-api.onrender.com/api/menu'
+  );
 
+  if (!response.ok) {
+    throw new Error('Failed to load menu');
+  }
+
+  const menus = await response.json();
+  
   let menuHTML = '';
 
   const url = new URL(window.location.href);

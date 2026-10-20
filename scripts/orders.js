@@ -4,7 +4,16 @@ import { getMenu } from '../data/menus.js';
 import formatCurrency from './utils/money.js';
 
 async function loadPage() {
-  const response = await fetch('http://localhost:3000/api/orders');
+  // const response = await fetch('http://localhost:3000/api/orders');
+  // const orders = await response.json();
+  const response = await fetch(
+    'https://bridges2-api.onrender.com/api/orders'
+  );
+
+  if (!response.ok) {
+    throw new Error(`HTTP Error: ${response.status}`);
+  }
+
   const orders = await response.json();
 
   let ordersHTML = '';

@@ -15,8 +15,11 @@ function getStatus(step) {
 async function renderTracking() {
   const orderId = getOrderIdFromUrl();
 
+  // const response = await fetch(
+  // `http://localhost:3000/api/orders/${orderId}`
+  // );
   const response = await fetch(
-  `http://localhost:3000/api/orders/${orderId}`
+    `https://bridges2-api.onrender.com/api/orders/${orderId}`
   );
 
   const order = await response.json();
